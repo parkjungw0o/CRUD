@@ -10,9 +10,9 @@ import Moya
 
 // 제공하는 서비스 정의
 public enum API {
-    case fetchPost(data: BoardRequest)  // 게시글 생성 (POST)
+    case fetchPost(data: PostRequest)  // 게시글 생성 (POST)
     case deletePost(boardID: Int)       // 게시글 삭제 (DELETE)
-    case pathPost(data: BoardRequest, boardID: Int) // 게시글 수정 (PATCH)
+    case updatePost(data: PostRequest, boardID: Int) // 게시글 수정 (PATCH)
     case getPost(boardID: Int)          // 게시글 조회 (GET)
     case getAllPosts        // 모든 게시글 조회
 }
@@ -29,9 +29,9 @@ extension API: TargetType {
         case .fetchPost:
             return "/posts"
         case .deletePost(let boardID),
-             .pathPost(_, let boardID),
+             .updatePost(_, let boardID),
              .getPost(let boardID):
-            return "/\(boardID)" // 개별 게시글 조회, 수정, 삭제 경로
+            return "/posts/\(boardID)" // 개별 게시글 조회, 수정, 삭제 경로
         case .getAllPosts:
             return "/posts" // 모든 게시글 조회 경로
         }
@@ -44,7 +44,7 @@ extension API: TargetType {
             return .post
         case .deletePost:
             return .delete
-        case .pathPost:
+        case .updatePost:
             return .patch
         case .getPost, .getAllPosts:
             return .get
@@ -55,7 +55,7 @@ extension API: TargetType {
     public var task: Task {
         switch self {
         case .fetchPost(let data),
-             .pathPost(let data, _):
+             .updatePost(let data, _):
             return .requestJSONEncodable(data)    //JSON 데이터를 바디에 포함하여 보냄
         case .deletePost, .getPost, .getAllPosts:
             return .requestPlain           // requstPlain 데이터 없이 요청만 보냄

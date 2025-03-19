@@ -1,9 +1,3 @@
-//
-//  BoardList.swift
-//  CRUD
-//
-//  Created by 박정우 on 3/19/25.
-//
 import SwiftUI
 
 struct PostListView: View {
@@ -13,24 +7,24 @@ struct PostListView: View {
         NavigationView {
             Group {
                 if viewModel.isLoading {
-                    // 로딩 중일 때 ProgressView 표시
                     ProgressView("로딩중...")
                 } else if let error = viewModel.errorMessage {
-                    // 에러 발생 시 에러 메시지 표시
                     Text(error)
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
                         .padding()
+                } else if viewModel.posts.isEmpty {
+                    Text("게시물이 없습니다!")
                 } else {
-                    // 게시물이 있을 때 List로 표시
                     List(viewModel.posts) { post in
-                        VStack(alignment: .leading, spacing: 8) {
+                        NavigationLink(destination: PostDetailView(postID: post.id)
+                            .onDisappear {
+                                viewModel.fetchPosts() // 디테일뷰에서 돌아오면 목록 새로고침
+                            }
+                        ) {
                             Text(post.title)
                                 .font(.headline)
-                            Text(post.content)
-                                .font(.body)
                         }
-                        .padding(.vertical, 4)
                     }
                 }
             }
@@ -45,3 +39,4 @@ struct PostListView: View {
 #Preview {
     PostListView()
 }
+

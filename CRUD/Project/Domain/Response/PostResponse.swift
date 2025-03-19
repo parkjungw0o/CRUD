@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PostResponse: Decodable, Identifiable {
+public struct PostResponse: Decodable {
     public let id: Int
     public let title: String
     public let content: String

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4E93D3D52D8A59D800741B61 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 4E93D3D42D8A59D800741B61 /* Moya */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4E93D3AF2D8A4AD600741B61 /* CRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E93D3D52D8A59D800741B61 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = CRUD;
 			packageProductDependencies = (
+				4E93D3D42D8A59D800741B61 /* Moya */,
 			);
 			productName = CRUD;
 			productReference = 4E93D3AF2D8A4AD600741B61 /* CRUD.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 4E93D3A62D8A4AD600741B61;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4E93D3D32D8A59D800741B61 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4E93D3B02D8A4AD600741B61 /* Products */;
 			projectDirPath = "";
@@ -322,6 +331,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E93D3D32D8A59D800741B61 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E93D3D42D8A59D800741B61 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E93D3D32D8A59D800741B61 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E93D3A72D8A4AD600741B61 /* Project object */;
 }
