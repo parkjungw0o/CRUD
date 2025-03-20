@@ -4,10 +4,12 @@ struct PostDetailView: View {
     let postID: Int
     @StateObject private var viewModel = PostDetailViewModel()
     @StateObject private var updateViewModel = PostUpdateViewModel()
+    @StateObject private var deleteViewModel = DeleteViewModel()
 
     @State private var isEditing = false
     @State private var editedTitle = ""
     @State private var editedContent = ""
+    @Environment(\.dismiss) private var dismiss // 이전 화면으로 돌아가기
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -32,9 +34,15 @@ struct PostDetailView: View {
                     Spacer()
                     
                     Button {
-                       
+                        // 삭제 요청
+                        deleteViewModel.deletePost(boardID: post.id) { success in
+                            if success {
+                                dismiss() // 삭제 성공 시 PostListView로 돌아가기
+                            }
+                        }
                     } label: {
                         Image(systemName: "trash")
+                            .foregroundColor(.red)
                     }
 
                     Button {
@@ -87,6 +95,12 @@ struct PostDetailView: View {
             set: { _ in updateViewModel.successMessage = nil }
         )) {
             Alert(title: Text("알림"), message: Text(updateViewModel.successMessage ?? ""), dismissButton: .default(Text("확인")))
+        }
+        .alert(isPresented: Binding<Bool>(
+            get: { deleteViewModel.successMessage != nil },
+            set: { _ in deleteViewModel.successMessage = nil }
+        )) {
+            Alert(title: Text("알림"), message: Text(deleteViewModel.successMessage ?? ""), dismissButton: .default(Text("확인")))
         }
     }
 }

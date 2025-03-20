@@ -19,7 +19,7 @@ struct PostListView: View {
                     List(viewModel.posts) { post in
                         NavigationLink(destination: PostDetailView(postID: post.id)
                             .onDisappear {
-                                viewModel.fetchPosts() // 디테일뷰에서 돌아오면 목록 새로고침
+                                viewModel.fetchPosts() //목록 새로고침
                             }
                         ) {
                             Text(post.title)
