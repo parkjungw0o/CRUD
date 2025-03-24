@@ -29,6 +29,7 @@ struct PostView: View {
                             .foregroundStyle(.yellow)
                     )
                     .padding(.top, 30)
+                
                 Button {
                     viewModel.SubmitPost(title: title, content: content)
                 }label: {

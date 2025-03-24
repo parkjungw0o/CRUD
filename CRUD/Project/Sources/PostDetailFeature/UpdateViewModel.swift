@@ -16,6 +16,8 @@ class PostUpdateViewModel: ObservableObject {
                 case .success(let response):
                     if (200..<300).contains(response.statusCode) {
                         self?.successMessage = "게시글 수정 완료"
+                        print(response.statusCode)
+                        print("수정 성공")
                         completion(true)
                     } else {
                         self?.errorMessage = "예상치 못한 응답 코드: \(response.statusCode)"

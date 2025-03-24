@@ -19,6 +19,7 @@ class DeleteViewModel: ObservableObject {
             case .success:
                 DispatchQueue.main.async {
                     self.successMessage = "게시글이 삭제되었습니다."
+                    print("삭제 완료")
                     completion(true)
                 }
             case .failure(let error):
