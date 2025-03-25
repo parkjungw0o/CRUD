@@ -4,20 +4,14 @@ import Moya
 
 class PostListViewModel: ObservableObject {
     @Published var posts: [Post] = []
-    @Published var isLoading = false
     @Published var errorMessage: String?
 
     private let provider = MoyaProvider<API>()
 
     func fetchPosts() {
-        isLoading = true
         errorMessage = nil
 
         provider.request(.getAllPosts) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-            }
-
             switch result {
             case .success(let response):
                 do {
